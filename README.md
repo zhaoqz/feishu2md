@@ -29,6 +29,16 @@
   - [获取知识空间节点信息](https://open.feishu.cn/document/server-docs/docs/wiki-v2/space-node/get_node)，「查看知识库」权限 `wiki:wiki:readonly`
 - 打开凭证与基础信息，获取 App ID 和 App Secret
 
+## 功能特性
+
+- 支持下载单个飞书文档为Markdown
+- 支持批量下载文件夹内的所有文档
+- 支持批量下载整个知识库的所有文档
+- 支持生成知识库目录结构
+- 支持下载文档中的图片
+- 支持Web界面操作【应该已不支持】
+- 支持Docker部署
+
 ## 如何使用
 
 注意：飞书旧版文档的下载工具已决定不再维护，但分支 [v1_support](https://github.com/Wsine/feishu2md/tree/v1_support) 仍可使用，对应的归档为 [v1.4.0](https://github.com/Wsine/feishu2md/releases/tag/v1.4.0)，请知悉。
@@ -84,8 +94,9 @@
      --dump                    Dump json response of the OPEN API (default: false)
      --batch                   Download all documents under a folder (default: false)
      --wiki                    Download all documents within the wiki. (default: false)
+     --outline                 只生成Wiki目录结构的Markdown文档，不下载实际内容 (default: false)
+     --outline-with-links      生成Wiki目录结构时包含文章链接（需要与--outline一起使用）(default: false)
      --help, -h                show help (default: false)
-
    ```
 
    **生成配置文件**
@@ -128,6 +139,22 @@
   $ feishu2md dl --wiki -o output_directory "https://domain.feishu.cn/wiki/settings/123456789101112"
   ```
 
+  **只生成知识库目录结构**
+
+  通过`feishu2md dl --outline <your feishu wiki setting url>` 可以只生成知识库的目录结构，不下载实际文档内容。
+
+  示例：
+
+  ```bash
+  $ feishu2md dl --outline "https://domain.feishu.cn/wiki/settings/123456789101112"
+  ```
+
+  如果需要在目录结构中包含文章链接，可以添加 `--outline-with-links` 参数：
+
+  ```bash
+  $ feishu2md dl --outline --outline-with-links "https://domain.feishu.cn/wiki/settings/123456789101112"
+  ```
+
 </details>
 
 <details>
@@ -167,6 +194,27 @@
 
   访问 https://feishu2md.onrender.com/ 粘贴文档链接即可，文档链接可以通过 **分享 > 开启链接分享 > 复制链接** 获得。
 </details>
+
+## 常见问题
+
+### 如何获取飞书文档链接？
+
+在飞书文档页面，点击右上角的「分享」按钮，选择「开启链接分享」，然后复制链接即可。
+
+### 如何获取知识库设置链接？
+
+在飞书知识库页面，点击左下角的「设置」按钮，然后复制浏览器地址栏中的链接即可。
+
+### 下载失败怎么办？
+
+1. 检查 APP ID 和 APP SECRET 是否正确配置
+2. 检查应用权限是否正确开通
+3. 检查文档链接是否有效
+4. 检查网络连接是否正常
+
+### 批量下载报告在哪里？
+
+批量下载完成后，会在输出目录下生成一个 `report_YYYYMMDD_HHMMSS.json` 文件，包含了下载的详细信息。
 
 ## 感谢
 
