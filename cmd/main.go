@@ -71,6 +71,18 @@ func main() {
 						Usage:       "Download all documents within the wiki.",
 						Destination: &dlOpts.wiki,
 					},
+					&cli.BoolFlag{
+						Name:        "outline",
+						Value:       false,
+						Usage:       "只生成Wiki目录结构的Markdown文档，不下载实际内容",
+						Destination: &dlOpts.wikiOutline,
+					},
+					&cli.BoolFlag{
+						Name:        "outline-with-links",
+						Value:       false,
+						Usage:       "生成Wiki目录结构时包含文章链接（需要与--outline一起使用）",
+						Destination: &dlOpts.wikiOutlineWithLinks,
+					},
 				},
 				ArgsUsage: "<url>",
 				Action: func(ctx *cli.Context) error {
