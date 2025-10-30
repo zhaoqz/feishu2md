@@ -104,6 +104,7 @@
    通过 `feishu2md config --appId <your_id> --appSecret <your_secret>` 命令即可生成该工具的配置文件。
 
    通过 `feishu2md config` 命令可以查看配置文件路径以及是否成功配置。
+   默认在 ~/Library/Application Support/feishu2md/config.json
 
    更多的配置选项请手动打开配置文件更改。
 
@@ -119,8 +120,6 @@
 
   **批量下载某文件夹内的全部文档为 Markdown**
 
-  此功能暂时不支持Docker版本
-
   通过`feishu2md dl --batch <your feishu folder url>` 直接下载，文件夹链接可以通过 **分享 > 开启链接分享 > 互联网上获得链接的人可阅读 > 复制链接** 获得。
 
   示例：
@@ -130,7 +129,7 @@
   ```
 
   **批量下载某知识库的全部文档为 Markdown**
-
+  **注意，需要创建一个群，把应用用添加机器人添加了。然后再知识库中编辑者中选择这个群容许编辑。  
   通过`feishu2md dl --wiki <your feishu wiki setting url>` 直接下载，wiki settings链接可以通过 打开知识库设置获得。
 
   示例：
